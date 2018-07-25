@@ -2,12 +2,35 @@ import React from 'react';
 import { mount } from 'enzyme';
 import CommentBox from 'components/CommentBox/CommentBox';
 
+let wrapped = null;
+
+beforeEach(() => {
+    wrapped = mount(<CommentBox />);
+});
+
+afterEach(() => {
+    wrapped.unmount();
+});
+
 it("contains a textarea and a button", () => {
-    const wrapped = mount(<CommentBox />);
-
-    console.log(wrapped.find("textarea"));
-    console.log(wrapped.find("button"));
-
     expect(wrapped.find("textarea").length).toEqual(1);
     expect(wrapped.find("button").length).toEqual(1);
+});
+
+it("has a type area, that users can type in", () => {
+    wrapped.find("textarea").simulate("change", { 
+        target: { value: "new comment" } 
+    });
+
+    wrapped.update();
+    
+    expect(wrapped.find("textarea").prop("value")).toEqual("new comment");
+});
+
+it("makes type area empty after submit", () => {
+    wrapped.find("form").simulate("submit", );
+    
+    wrapped.update();
+    
+    wrapped.find("textarea")
 });
