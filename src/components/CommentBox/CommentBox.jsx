@@ -9,9 +9,13 @@ class CommentBox extends Component {
         this.setState({ comment: event.target.value });
     }
 
+    handleSubmit = event => {
+        this.setState({ comment: "" });
+    }
+
     render() {
         return (
-            <form action="#">
+            <form action="#" onSubmit={ this.handleSubmit }>
                 <h4>Add a comment</h4>
                 <textarea onChange={ this.handleTextareaChange } className="form-control" name="" id="" rows="10" value={ this.state.comment } />
                 <div>

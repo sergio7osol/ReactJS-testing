@@ -17,20 +17,24 @@ it("contains a textarea and a button", () => {
     expect(wrapped.find("button").length).toEqual(1);
 });
 
-it("has a type area, that users can type in", () => {
-    wrapped.find("textarea").simulate("change", { 
-        target: { value: "new comment" } 
+
+describe("the textarea", () => {
+    
+    beforeEach(() => {
+        wrapped.find("textarea").simulate("change", { 
+            target: { value: "new comment" } 
+        });
+    
+        wrapped.update();
     });
 
-    wrapped.update();
+    it("has a type area, that users can type in", () => {
+        expect(wrapped.find("textarea").prop("value")).toEqual("new comment");
+    });
     
-    expect(wrapped.find("textarea").prop("value")).toEqual("new comment");
-});
-
-it("makes type area empty after submit", () => {
-    wrapped.find("form").simulate("submit", );
-    
-    wrapped.update();
-    
-    wrapped.find("textarea")
+    it("makes type area to get emptied after submit", () => {
+        wrapped.find("form").simulate("submit");
+        wrapped.update();
+        expect(wrapped.find("textarea").prop("value")).toEqual("");
+    });
 });
