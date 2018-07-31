@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 class CommentList extends Component {
     renderComments() {
         return this.props.comments.map(comment => {
-            return <li key={comment}>{ comment }</li>
+            return <li className="flex-sm-fill nav-link" key={comment}>{ comment }</li>
         });    
     }
 
     render() {
         return (
             <div>
-                <ul>
-                    { this.renderComments }
+                <ul className="nav nav-pills flex-column flex-sm-column">
+                    { this.renderComments() }
                 </ul>
             </div>
         );
